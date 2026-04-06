@@ -1,0 +1,15 @@
+[project]
+name = "lambda-interpreter"
+version = "0.1.0"
+description = "Интерпретатор лямбда-исчисления. Практика по курсу Математическая логика и модели вычислений (ФПМИ МФТИ)."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "rich"
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "ruff>=0.15.9",
+]
