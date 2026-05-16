@@ -60,13 +60,44 @@ def subtitude(term: Term, var: str, value: Term) -> Term:
             free_vars = get_free_vars(value)
             if param in free_vars and var in get_free_vars(body):
                 used_names = get_free_vars(body) | free_vars | {var}
+
                 new_param = alpha_reduction(param, used_names)
                 new_body = subtitude(body, param, Variable(new_param))
+
                 return Abstraction(
                     param=new_param, body=subtitude(new_body, var, value)
                 )
             return Abstraction(param=param, body=subtitude(body, var, value))
         case MacroReference(name):
             raise RuntimeError(
-                "Noticed unexpectable marco: {name}, expand macroses before subtitude"
+                f"Noticed unexpectable marco: {name}, expand macroses before subtitude"
             )
+
+
+def reduce_term(term: Term) -> Term | None:
+    match term:
+        case Variable(name):
+            return None
+
+        case Abstraction(param, body):
+            new_body = reduce_term(body)
+            if new_body is not None:
+                return Abstraction(param, new_body)
+            return None
+
+        case Application(left, right):
+            if isinstance(left, Abstraction):
+                return subtitude(left.body, left.param, right)
+
+            new_left = reduce_term(left)
+            if new_left is not None:
+                return Application(new_left, right)
+
+            new_right = reduce_term(right)
+            if new_right is not None:
+                return Application(left, new_right)
+
+            return None
+
+        case MacroReference(name):
+            return None

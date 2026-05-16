@@ -5,7 +5,11 @@ description = "Интерпретатор лямбда-исчисления. П�
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "rich"
+    "dot>=0.3.0",
+    "graphviz>=0.21",
+    "lark>=1.3.1",
+    "pydot>=4.0.1",
+    "rich",
 ]
 
 [dependency-groups]
