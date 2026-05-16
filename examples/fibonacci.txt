@@ -1,0 +1,17 @@
+PAIR = \x y f.f x y
+FST = \p.p (\x y.x)
+SND = \p.p (\x y.y)
+
+ZERO = \f x.x
+SUCC = \n f x.f (n f x)
+ADD = \m n.m SUCC n
+
+FIB_STEP = \p.PAIR (SND p) (ADD (FST p) (SND p))
+
+ONE = SUCC ZERO
+TWO = SUCC ONE
+THREE = SUCC TWO
+
+FIB_START = PAIR ZERO ONE
+
+FST (THREE FIB_STEP FIB_START)

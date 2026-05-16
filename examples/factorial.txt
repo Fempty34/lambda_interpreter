@@ -1,0 +1,21 @@
+TRUE = \x y.x
+FALSE = \x y.y
+IF = \b t f.b t f
+
+ZERO = \f x.x
+SUCC = \n f x.f (n f x)
+ISZERO = \n.n (\x.FALSE) TRUE
+
+ADD = \m n.m SUCC n
+MUL = \m n f.m (n f)
+
+PRED = \n f x.n (\g h.h (g f)) (\u.x) (\u.u)
+
+Y = \f.(\x.f (x x)) (\x.f (x x))
+
+FACT_STEP = \f n.IF (ISZERO n) (SUCC ZERO) (MUL n (f (PRED n)))
+FACT = Y FACT_STEP
+
+THREE = SUCC (SUCC (SUCC ZERO))
+
+FACT THREE

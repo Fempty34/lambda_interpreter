@@ -1,5 +1,8 @@
-(
-  (\m.\n.\f.\x. ((m f) ((n f) x)))
-  (\f.\x. (f (f x)))
-)
-(\f.\x. (f (f (f x))))
+ZERO = \f x.x
+SUCC = \n f x.f (n f x)
+ADD = \m n.m SUCC n
+
+ONE = SUCC ZERO
+TWO = SUCC ONE
+
+ADD ONE TWO

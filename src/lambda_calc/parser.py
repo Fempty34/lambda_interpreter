@@ -1,7 +1,7 @@
 from functools import reduce
 from lark import Lark, Transformer, v_args
 from lark import tree as larktree
-from models import (
+from .models import (
     Term,
     Variable,
     Abstraction,

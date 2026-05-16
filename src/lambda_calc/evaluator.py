@@ -1,4 +1,4 @@
-from models import *
+from .models import *
 
 
 def get_free_vars(term: Term) -> set[str]:
@@ -37,9 +37,11 @@ def expand_macroses(term: Term, macroses: dict[str, Term]) -> Term:
 def alpha_reduction(name: str, used_names: set[str]) -> str:
     counter = 1
     res = f"{name}{counter}"
+
     while res in used_names:
         counter += 1
         res = f"{name}{counter}"
+
     return res
 
 
